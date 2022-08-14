@@ -11,11 +11,9 @@ import com.masai.model.Wallet;
 
 @Service
 public interface WalletServices {
-	
-  // public Customer createAccount(Customer customer); // name,mobilino,balance,password
+
    
   
-	public BankAccount createAccount(BankAccount bank, String key);
  
     public void FundTransfer(String sourceMobileNo, String targetMobileNo,double amount) throws InsufficientAmountException;
 
@@ -29,7 +27,7 @@ public interface WalletServices {
    public Customer depositAmount(double amount ,String key) throws InsufficientAmountException;
  
    
-   public String addMoneyToWallet(double amount,String key) throws InsufficientAmountException;
+   public String addMoneyToWallet(int bankAccountNumber,double amount,String key) throws InsufficientAmountException;
    
    
    
