@@ -43,6 +43,13 @@ public class WalletController {
 		
 	}
 	
+	@GetMapping("/walletbalance")
+	public double showWalletBalanceHandler(@RequestParam String key) {
+		return wService.showWalletBalance(key);
+	}
+	
+	
+	
    
 //	@GetMapping("/balance/{mobileNumber}")
 //	public double showBalanceHandler(@PathVariable("mobileNumber") String mobileNumber) throws InvalidAccountException {
