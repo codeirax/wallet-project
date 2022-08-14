@@ -45,23 +45,28 @@ public class WalletServiceImpl implements WalletServices{
 	@Override
 	public double showWalletBalance(String key) throws NotFoundException {
 		// TODO Auto-generated method stub
-		return 0;
+		
+	 double balance =	getCurrentLoginUser.getCurrentUserWallet(key).getBalance();
+		
+		
+		return balance;
 	}
 
 	@Override
 	public Customer depositAmount(double amount, String key) throws InsufficientAmountException {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 
+	//add
 	@Override
 	public String addMoneyToWallet(double amount, String key) throws InsufficientAmountException {
 		
-		
-		
-		
-		// TODO Auto-generated method stub
-		return null;
+	  
+		return "Amount : " + amount +"added to wallet";
 	}
 
 	@Override
@@ -71,7 +76,6 @@ public class WalletServiceImpl implements WalletServices{
 	  
 	   wallet.getBankaccounts().add(bank);
 	   
-	    wDao.save(wallet);
 	    
 	    bank.setWallet(wallet);
 		bDao.save(bank);

@@ -33,15 +33,15 @@ public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUse
 		return optional.get();
 	}
 	
-	public Integer getCurrentUserSessionId(String key){
-		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
-		
-		if(!optional.isPresent()) {
-			throw new NotFoundException("Unauthorized");
-		}
-		
-		return optional.get().getId();
-	}
+//	public Integer getCurrentUserSessionId(String key){
+//		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
+//		
+//		if(!optional.isPresent()) {
+//			throw new NotFoundException("Unauthorized");
+//		}
+//		
+//		return optional.get().getId();
+//	}
 	
 	public Customer getCurrentCustomer(String key) {
 		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);

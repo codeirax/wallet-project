@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 public class BankAccount {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer accountNo;
 	
 	private String ifscCode;
