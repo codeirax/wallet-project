@@ -1,5 +1,6 @@
 package com.masai.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class CustomerServiceImpl implements CustomerServiceIntr{
 		Customer customer2 = getCurrentLoginUser.getCurrentCustomer(key);
 		
 		if(customer2 == null) {
-			throw new NotFoundException("No user found.. try login first");
+			throw new NotFoundException("User not found need to login..");
 		}
 		
 		customer2.setMobileNumber(customer.getMobileNumber());
@@ -78,6 +79,21 @@ public class CustomerServiceImpl implements CustomerServiceIntr{
 		Customer customer = getCurrentLoginUser.getCurrentCustomer(key);	
 //		System.out.println(customer);
 		return customer;
+	}
+
+
+	@Override
+	public List<Customer> getCustomerList() throws NotFoundException {
+		// TODO Auto-generated method stub
+     
+		List<Customer> customers = customerDao.findAll();
+		
+		if(customers.size() <= 0) {
+			throw new NotFoundException("Customer not found..");
+		}
+		return customerDao.findAll();
+		
+		
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.masai.services;
 
-public interface AccountServicesIntr {
+import com.masai.model.BankAccount;
 
+public interface AccountServicesIntr {
+	
+	public BankAccount addAccount(BankAccount bank, String key);
 }
