@@ -1,7 +1,6 @@
 package com.masai.controllers;
 
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,55 +47,13 @@ public class WalletController {
 		
 	}
 	
-
-	
-	
    
-//	@GetMapping("/balance/{mobileNumber}")
-//	public double showBalanceHandler(@PathVariable("mobileNumber") String mobileNumber) throws InvalidAccountException {
-//		return wService.showBalance(mobileNumber);
-//	}
-//	
-//   // validate login
-//	
-//	@GetMapping("/validate/{mobileNumber}/{password}")
-//	public Customer validateLoginHandler(@PathVariable("mobileNumber") String mobileNumber, @PathVariable("password") String password) throws InvalidAccountException {
-//		return uService.validLogin(mobileNumber, password);
-//	}
-//	
-//	@PutMapping("/walletfundtransfer/{sourceMobile}/{targeMobile}/{amount}")
-//	public String fundTransferHandler(@PathVariable String sourceMobile,@PathVariable String targeMobile,@PathVariable double amount) throws WalletException {
-//		wService.FundTransfer(sourceMobile, targeMobile, amount);
-//		return amount + " Transaction successfull";
-//	}
-//	
-//	@PutMapping("/deposit/{mobileNumber}/{bankName}/{amount}")
-//	public Customer depositToBank(@PathVariable String mobileNumber,@PathVariable String bankName, @PathVariable double amount) {
-//		
-//		return wService.depositAmount(mobileNumber, bankName, amount);
-//	}
-//	
-//	//customer
-//	
-//	@GetMapping("/customerlist")
-//	public List<Customer> customerListsHandler(){
-//		 return uService.getList();
-//	}
-//	
-//	
-//	
-//	@PutMapping("/updatecustomer")
-//	public Customer updateCustomer(@RequestBody Customer customer) {
-//		return uService.updateCustomer(customer);
-//		
-//	}
-//	
-//	
-//	@PutMapping("/addmoney/{walletid}/{bankName}/{amount}")
-//	public Customer addMoneyToWalletHandler(@PathVariable Integer walletid,@PathVariable String bankName,@PathVariable double amount) {
-//		
-//		return wService.addMoneytoWallet(walletid, bankName, amount);
-//	}
+	@PutMapping("/fundtransfer")
+	public String fundTransferHandler(@RequestParam String key, @RequestParam String mobileNumber, @RequestParam double amount) {
+		
+		return wService.FundTransfer(key, mobileNumber, amount);
+	}
 	
+
 	
 }

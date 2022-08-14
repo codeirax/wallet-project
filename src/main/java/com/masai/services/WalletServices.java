@@ -15,19 +15,18 @@ public interface WalletServices {
    
   
  
-    public void FundTransfer(String sourceMobileNo, String targetMobileNo,double amount) throws InsufficientAmountException;
-
+    public String FundTransfer(String key ,String targetMobileNo,double amount);
    
-    public double showWalletBalance(String key) throws NotFoundException;
+    public double showWalletBalance(String key);
     
 //    public double showBankBalance(String key) throws NotFoundException;
     
     
    
-   public Customer depositAmount(double amount ,String key) throws InsufficientAmountException;
+   public Customer depositAmount(double amount ,String key);
  
    
-   public String addMoneyToWallet(int bankAccountNumber,double amount,String key) throws InsufficientAmountException;
+   public String addMoneyToWallet(int bankAccountNumber,double amount,String key);
    
    
    

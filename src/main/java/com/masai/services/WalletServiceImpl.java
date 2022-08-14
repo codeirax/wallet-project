@@ -14,6 +14,7 @@ import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
 import com.masai.exceptions.WalletException;
 import com.masai.model.BankAccount;
+import com.masai.model.Benificiary;
 import com.masai.model.Customer;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
@@ -36,9 +37,31 @@ public class WalletServiceImpl implements WalletServices{
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
 
 	@Override
-	public void FundTransfer(String sourceMobileNo, String targetMobileNo, double amount)
-			throws InsufficientAmountException {
-		// TODO Auto-generated method stub
+	public String FundTransfer(String key, String targetMobileNo, double amount)
+	 {
+		
+		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
+		
+	List<Benificiary> bList = wallet.getBenificiaryList();
+	
+	Benificiary bf = null;
+	
+   for(Benificiary b:bList) {
+	   if(b.getMobileNumber().equals(targetMobileNo)) {
+		   bf = b;
+	   }
+    }
+   
+   if(bf == null)
+	 throw new NotFoundException("Benificiary not found with this mobile number");
+   
+   wallet.setBalance(wallet.getBalance() - amount);
+   
+     wDao.save(wallet);
+  
+   return "Fund transfer to " + bf.getName();
+   
+	
 		
 	}
 
