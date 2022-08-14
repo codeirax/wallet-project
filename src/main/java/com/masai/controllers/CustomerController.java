@@ -32,6 +32,7 @@ public class CustomerController {
 			return customerServiceImpl.updateCustomer(customer, key);
 		}
 		
+		
 		// To delete existing user details by passing its login key
 		@DeleteMapping(value = "/customer")
 		public Customer deleteCustomer(@RequestParam(required = false) String key) {
