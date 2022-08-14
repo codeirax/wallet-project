@@ -61,28 +61,39 @@ public class WalletServiceImpl implements WalletServices{
 		return null;
 	}
 
-	//add
+	//add money with the help of bank.
+	
 	@Override
-	public String addMoneyToWallet(double amount, String key) throws InsufficientAmountException {
+	@Transactional
+	public String addMoneyToWallet(int bankAccountNumber,double amount, String key) throws InsufficientAmountException {
 		
+	   Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
+	   
+	  List<BankAccount> banks = wallet.getBankaccounts();
+	 
+	  for(BankAccount bank:banks) {
+		  if(bank.getAccountNo() == bankAccountNumber) {
+			  if(bank.getBalance() >= amount) {
+				  
+				  bank.setBalance(bank.getBalance() - amount);
+				  wallet.setBalance(wallet.getBalance() + amount);
+				  bDao.save(bank);
+				  wDao.save(wallet);
+				  return "Amount : " + amount +"added to wallet";
+			  }else {
+				  throw new InsufficientAmountException("Insufficient amount in bank account..");
+			  }
+			
+		  }
+	  }
+	  throw new NotFoundException("Bank not found..");
 	  
-		return "Amount : " + amount +"added to wallet";
+	
+		
 	}
 
-	@Override
-	public BankAccount createAccount(BankAccount bank, String key) {
-		
-	  Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
-	  
-	   wallet.getBankaccounts().add(bank);
-	   
-	    
-	    bank.setWallet(wallet);
-		bDao.save(bank);
-		
-		return bank;
-	}
 	
+
 	
 
 	

@@ -36,18 +36,19 @@ public class WalletController {
   
   
 	
-	@PostMapping("/createaccount")
-	public BankAccount createAccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
-		
-		return wService.createAccount(bank, key);
-		
-	}
 	
 	@GetMapping("/walletbalance")
 	public double showWalletBalanceHandler(@RequestParam String key) {
 		return wService.showWalletBalance(key);
 	}
 	
+	@PostMapping("/addmoney/{accountNumber}/{amount}")
+	public String addMoneyToWallet(@PathVariable int accountNumber, @PathVariable double amount, @RequestParam String key) {
+		return wService.addMoneyToWallet( accountNumber, amount,key);
+		
+	}
+	
+
 	
 	
    

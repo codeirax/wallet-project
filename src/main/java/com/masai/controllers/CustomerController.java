@@ -1,5 +1,7 @@
 package com.masai.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,12 @@ public class CustomerController {
 		@GetMapping(value = "/customer")
 		public Customer getCustomerDetails(@RequestParam(required = false) String key) {
 			return customerServiceImpl.getCustomerDetails(key);
+		}
+		
+		
+		@GetMapping(value = "/customers")
+		public List<Customer> getAllCustomersDetailsHandler(){
+			return customerServiceImpl.getCustomerList();
 		}
 	
 
