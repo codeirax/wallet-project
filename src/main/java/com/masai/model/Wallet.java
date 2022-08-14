@@ -48,6 +48,8 @@ public class Wallet {
  private Customer customer;
  
 
+
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
  private List<BillPayment> billlist = new ArrayList<BillPayment>();
+
 }
