@@ -37,6 +37,13 @@ public class Wallet {
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
  private List<BankAccount> bankaccounts = new ArrayList<BankAccount>();
 
+ @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+ private List<Transaction> transactions = new ArrayList<Transaction>();
+
+ @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+ private List<Benificiary> benificiaries = new ArrayList<Benificiary>();
+
+ 
  @OneToOne(cascade = CascadeType.ALL)
 // @JsonIgnore
 // @JoinColumn(name = "customer_id",referencedColumnName = "cid")
