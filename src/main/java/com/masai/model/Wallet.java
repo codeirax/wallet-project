@@ -50,6 +50,4 @@ public class Wallet {
  private Customer customer;
  
  
-
- 
 }
