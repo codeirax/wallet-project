@@ -16,7 +16,6 @@ import com.masai.exceptions.NotFoundException;
 import com.masai.exceptions.WalletException;
 import com.masai.model.BankAccount;
 import com.masai.model.Benificiary;
-import com.masai.model.Customer;
 import com.masai.model.Transaction;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
@@ -86,13 +85,38 @@ public class WalletServiceImpl implements WalletServices{
 
 	
 	
+//	wallet to bank
 	@Override
-	public Customer depositAmount(double amount, String key) throws InsufficientAmountException {
-		// TODO Auto-generated method stub
+	public BankAccount depositAmount(long accountNumber,double amount, String key) throws InsufficientAmountException {
 		
 		
+		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
 		
-		return null;
+	  List<BankAccount> banks = wallet.getBankaccounts(); 
+	  
+	  if(banks.size() <= 0) {
+		  throw new NotFoundException("Bank not found..");
+	  }
+	  
+	  
+	  BankAccount b=null;
+	  for(BankAccount bank:banks) {
+		  if(bank.getAccountNo() == accountNumber) {
+			 b=bank;
+			  
+		  }
+	  
+	  }
+	 
+	  if(b== null) {
+		  throw new NotFoundException("Bank account not found..");
+	  }
+	  
+	  b.setBalance(b.getBalance() + amount);
+	   bDao.save(b);
+	   return b;
+		
+		
 	}
 
 	//add money with the help of bank.

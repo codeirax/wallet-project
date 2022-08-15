@@ -6,7 +6,6 @@ import com.masai.exceptions.InsufficientAmountException;
 import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
 import com.masai.model.BankAccount;
-import com.masai.model.Customer;
 import com.masai.model.Wallet;
 
 @Service
@@ -23,7 +22,7 @@ public interface WalletServices {
     
     
    
-   public Customer depositAmount(double amount ,String key);
+   public BankAccount depositAmount(long accountNumber,double amount ,String key);
  
    
    public String addMoneyToWallet(long bankAccountNumber,double amount,String key);
