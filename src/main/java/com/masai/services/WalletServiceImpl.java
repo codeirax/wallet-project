@@ -1,6 +1,7 @@
 package com.masai.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +17,11 @@ import com.masai.exceptions.WalletException;
 import com.masai.model.BankAccount;
 import com.masai.model.Benificiary;
 import com.masai.model.Customer;
+import com.masai.model.Transaction;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
 import com.masai.repository.CustomerDao;
+import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDao;
 import com.masai.util.GetCurrentLoginUserSessionDetailsImpl;
 import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
@@ -32,7 +35,8 @@ public class WalletServiceImpl implements WalletServices{
 	CustomerDao cDao;
 	@Autowired
 	BankAccountDao bDao;
-	
+	@Autowired
+	TransactionDao trDao;
 	@Autowired
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
 
@@ -41,7 +45,7 @@ public class WalletServiceImpl implements WalletServices{
 	 {
 		
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-		
+		Customer c = getCurrentLoginUser.getCurrentCustomer(key);
 	List<Benificiary> bList = wallet.getBenificiaryList();
 	
 	Benificiary bf = null;
@@ -56,13 +60,19 @@ public class WalletServiceImpl implements WalletServices{
 	 throw new NotFoundException("Benificiary not found with this mobile number");
    
    wallet.setBalance(wallet.getBalance() - amount);
-   
-     wDao.save(wallet);
-  
+   Transaction tr = new Transaction();
+   tr.setTransactionDate(LocalDate.now());
+   tr.setAmount(amount);
+   tr.setTranserfrom(c.getMobileNumber());
+   tr.setTransferredto(targetMobileNo);
+   tr.setTransactionType("Fund Transfer");
+   wallet.getTransactions().add(tr);
+   tr.setWallet(wallet);
+   trDao.save(tr);
+    wDao.save(wallet);
+    
    return "Fund transfer to " + bf.getName();
-   
 	
-		
 	}
 
 	@Override
@@ -97,7 +107,17 @@ public class WalletServiceImpl implements WalletServices{
 	  for(BankAccount bank:banks) {
 		  if(bank.getAccountNo() == bankAccountNumber) {
 			  if(bank.getBalance() >= amount) {
-				  
+				  //tr
+				  Transaction tr = new Transaction();
+				   tr.setTransactionDate(LocalDate.now());
+				   tr.setAmount(amount);
+				   tr.setTranserfrom(bank.getBankname());
+				   tr.setTransferredto("Wallet");
+				   tr.setTransactionType("Add Money In Wallet");
+				   wallet.getTransactions().add(tr);
+				   tr.setWallet(wallet);
+				   trDao.save(tr);
+				  //tr
 				  bank.setBalance(bank.getBalance() - amount);
 				  wallet.setBalance(wallet.getBalance() + amount);
 				  bDao.save(bank);
