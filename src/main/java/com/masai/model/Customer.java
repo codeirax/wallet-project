@@ -9,7 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,13 +33,14 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
 	
-	@NotNull(message = "Name could not be null")
+	@NotEmpty(message = "Name could not be null")
 	private String name;
-	
-	@NotNull(message = "Mobile number could not be null")
+  
+	@Pattern(regexp = "[789]{1}[0-9]{9}")
 	private String mobileNumber;
 	
 	@NotNull(message = "Password  could not be null")
+	@Size(min=4,max=10,message ="Password size min 4 and max 10 required")
 	private String password;
 	
 	

@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.BillPayment;
+import com.masai.model.Transaction;
 import com.masai.services.BillPaymentImpl;
+import com.masai.services.TransactionSevices;
 
 @RestController
 public class BillPaymentController {
 
+	@Autowired
+	private TransactionSevices trServices;
+	
 	@Autowired
 	private BillPaymentImpl billservice;
 	
@@ -27,4 +32,14 @@ public class BillPaymentController {
 	public List<BillPayment> getallbills(@RequestParam String key){
 		return billservice.billList(key);
 	}
+	
+
+	@GetMapping("/transactionlist")
+	public List<Transaction> getTransactionList(@RequestParam String key) {
+		
+		return trServices.viewAllTransaction(key);
+	}
+	
+	
+	
 }

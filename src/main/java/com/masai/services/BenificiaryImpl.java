@@ -1,12 +1,16 @@
 package com.masai.services;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
+import com.masai.exceptions.UserAlreadyExistWithMobileNumber;
 import com.masai.model.BankAccount;
 import com.masai.model.Benificiary;
 import com.masai.model.Wallet;
@@ -33,9 +37,14 @@ public class BenificiaryImpl implements BenificiaryIntr {
 	
 	@Autowired
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
-
+  
 	@Override
 	public Benificiary addBenificiary(Benificiary benificary, String key) {
+		
+		Optional<Benificiary> optBenificiary = bfDao.findByMobileNumber(benificary.getMobileNumber());
+		if(optBenificiary.isPresent()) {
+			throw new UserAlreadyExistWithMobileNumber("Benificiary already added..");
+		}
 		
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
 		
@@ -48,25 +57,7 @@ public class BenificiaryImpl implements BenificiaryIntr {
 		return benificary;
 	}
 
-	@Override
-	public Benificiary deleteBenificiary(String name, String key) {
-		// TODO Auto-generated method stub
-		 Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
-		 
-			List<Benificiary> bflist = wallet.getBenificiaryList();
-			
-			for(Benificiary bf:bflist) {
-				if(bf.getName().equals(name)) {
-					bflist.remove(bf);
-					bfDao.delete(bf);
-					wDao.save(wallet);
-					return bf;	
-				}
-			}
-			
-			throw new InvalidAccountException("Check Account Name");
 
-	}
 
 	@Override
 	public List<Benificiary> viewAllBenificiary(String key) {

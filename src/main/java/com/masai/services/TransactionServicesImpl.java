@@ -44,30 +44,6 @@ public class TransactionServicesImpl implements TransactionSevices {
 
 	
 	
-	@Override
-	public List<Transaction> viewAllTransactionByDate(String key, String date) {
-		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-		DateTimeFormatter format; 
-		try {
-			 format= DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			
-		}catch (Exception e) {
-			throw new NotFoundException("Date didn't match");
-		}	
-		List <Transaction>  transactionList = wallet.getTransactions();
-		
-		List <Transaction> trList2 = new ArrayList<Transaction>();
-		
-		for(Transaction tx : transactionList) {
-			if(tx.getTransactionDate().equals(format)) {
-				trList2.add(tx);
-			}
-		}
-		if(trList2.size() == 0) {
-			throw new NotFoundException("Transaction not found as per given date");
-		}
-		return trList2;
-	}
 
 	
 

@@ -1,6 +1,5 @@
 package com.masai.services;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -11,18 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exceptions.InsufficientAmountException;
-import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
-import com.masai.exceptions.WalletException;
 import com.masai.model.BankAccount;
 import com.masai.model.Benificiary;
+import com.masai.model.Customer;
 import com.masai.model.Transaction;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDao;
-import com.masai.util.GetCurrentLoginUserSessionDetailsImpl;
 import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
 
 @Service
@@ -39,6 +36,8 @@ public class WalletServiceImpl implements WalletServices{
 	@Autowired
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
 
+	
+	@Transactional
 	@Override
 	public String FundTransfer(String key, String targetMobileNo, double amount)
 	 {
@@ -86,6 +85,7 @@ public class WalletServiceImpl implements WalletServices{
 	
 	
 //	wallet to bank
+	@Transactional
 	@Override
 	public BankAccount depositAmount(long accountNumber,double amount, String key) throws InsufficientAmountException {
 		
@@ -112,6 +112,15 @@ public class WalletServiceImpl implements WalletServices{
 		  throw new NotFoundException("Bank account not found..");
 	  }
 	  
+	  Transaction tr = new Transaction();
+	   tr.setTransactionDate(LocalDate.now());
+	   tr.setAmount(amount);
+	   tr.setDescription("Money added to bank account..");
+	   tr.setTransactionType("Cash deposit");
+	   wallet.getTransactions().add(tr);
+	   tr.setWallet(wallet);
+	   trDao.save(tr);
+	  
 	  b.setBalance(b.getBalance() + amount);
 	   bDao.save(b);
 	   return b;
@@ -136,8 +145,8 @@ public class WalletServiceImpl implements WalletServices{
 				  Transaction tr = new Transaction();
 				   tr.setTransactionDate(LocalDate.now());
 				   tr.setAmount(amount);
-				   tr.setDescription("Money added to wallet..");
-				   tr.setTransactionType("Add Money In Wallet");
+				   tr.setDescription("Money added in wallet..");
+				   tr.setTransactionType("Add Money");
 				   wallet.getTransactions().add(tr);
 				   tr.setWallet(wallet);
 				   trDao.save(tr);
@@ -146,7 +155,7 @@ public class WalletServiceImpl implements WalletServices{
 				  wallet.setBalance(wallet.getBalance() + amount);
 				  bDao.save(bank);
 				  wDao.save(wallet);
-				  return "Amount : " + amount +"added to wallet";
+				  return "Amount : " + amount +" added to wallet";
 			  }else {
 				  throw new InsufficientAmountException("Insufficient amount in bank account..");
 			  }
@@ -157,6 +166,44 @@ public class WalletServiceImpl implements WalletServices{
 	  
 	
 		
+	}
+
+	 @Transactional
+	@Override
+	public Customer transferToCustomerWallet(String targetMobileNumber,double amount, String key) {
+		
+		
+	 Customer targetCustomer =	cDao.findByMobileNumber(targetMobileNumber).get();
+	 
+	 if(targetCustomer == null) {
+		 throw new NotFoundException("Customer not found..");
+	 }
+	 
+	 Wallet tWallet = targetCustomer.getWallet();
+	 
+	  Wallet cWallet = getCurrentLoginUser.getCurrentUserWallet(key);
+		
+	  if(cWallet.getBalance() < amount) {
+		  throw new InsufficientAmountException("Insufficient amount in wallet");
+	  }
+	    cWallet.setBalance(cWallet.getBalance() - amount);
+		tWallet.setBalance(tWallet.getBalance() + amount);
+		 //tr
+		  Transaction tr = new Transaction();
+		   tr.setTransactionDate(LocalDate.now());
+		   tr.setAmount(amount);
+		   tr.setDescription("Amount transfer to customer..");
+		   tr.setTransactionType("Fund Transfer");
+		   cWallet.getTransactions().add(tr);
+		   tr.setWallet(cWallet);
+		   trDao.save(tr);
+		   
+		wDao.save(cWallet);
+		wDao.save(tWallet);
+		
+	
+		
+		return targetCustomer;
 	}
 
 	

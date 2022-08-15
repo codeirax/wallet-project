@@ -26,10 +26,8 @@ public class BenificiaryController {
 		
 	}
 	
-	@DeleteMapping("/deletebenificiary")
-	public Benificiary deletebenificiary(@RequestParam String key,@RequestParam String name) {
-		return bService.deleteBenificiary(name, key);
-	}
+	
+
 	
 	@GetMapping("/getBenificiaries")
 	public List<Benificiary> benificiaryListyHandler(@RequestParam String key) {

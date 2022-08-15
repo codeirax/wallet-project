@@ -13,7 +13,7 @@ public interface BenificiaryIntr {
 	
 	public Benificiary addBenificiary(Benificiary benificary,String key);
 	
-	public Benificiary deleteBenificiary(String name ,String key);
+	
 	
 	public List<Benificiary> viewAllBenificiary(String key);
 	

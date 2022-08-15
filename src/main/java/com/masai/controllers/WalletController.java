@@ -49,6 +49,12 @@ public class WalletController {
 		return wService.FundTransfer(key, mobileNumber, amount);
 	}
 	
+	
+	@PutMapping("/transfertocustomer/{m}/{a}")
+	public Customer customerToCustomerHandler(@PathVariable("m") String mobileNumber , @PathVariable("a") double amount ,@RequestParam String key ) {
+		
+		return wService.transferToCustomerWallet(mobileNumber, amount, key);
+	}
 
 	
 }

@@ -1,11 +1,13 @@
 package com.masai.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.masai.exceptions.InvalidAccountException;
+import com.masai.exceptions.UserAlreadyExistWithMobileNumber;
 import com.masai.model.BankAccount;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
@@ -29,7 +31,15 @@ public class AccountServicesImpl implements AccountServicesIntr {
 	@Override
 	public BankAccount addAccount(BankAccount bank, String key) {
 		
-		 Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
+		boolean flag = 	bDao.existsById(bank.getAccountNo());
+		
+		
+		if(flag) {
+			throw new UserAlreadyExistWithMobileNumber("This bank account is already added..");
+		}
+		
+		 Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
+
 		  
 		   wallet.getBankaccounts().add(bank);
 			wDao.save(wallet);

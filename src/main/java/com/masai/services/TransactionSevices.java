@@ -17,14 +17,10 @@ import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
 @Repository
 public interface TransactionSevices {
 	
-//	public Transaction addTransaction (Transaction trans);
-	
-
-//    private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
 	
 	public List<Transaction> viewAllTransaction(String key);
 	
-	public List<Transaction> viewAllTransactionByDate(String key, String localDate);
+
 	
 	
 }
