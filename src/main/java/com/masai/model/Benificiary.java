@@ -1,18 +1,36 @@
 package com.masai.model;
 
-import org.springframework.stereotype.Service;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+<<<<<<< HEAD
+=======
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+>>>>>>> master
 public class Benificiary {
-
+	
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer bid;
 	private String name;
 	private String mobileNumber;
 	
-	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Wallet wallet;
 }

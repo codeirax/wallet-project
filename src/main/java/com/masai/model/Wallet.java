@@ -56,16 +56,25 @@ public class Wallet {
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
  private List<Transaction> transactions = new ArrayList<Transaction>();
 
+<<<<<<< HEAD
 // @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
 // private List<Benificiary> benificiaries = new ArrayList<Benificiary>();
 
  
+=======
+>>>>>>> master
  @OneToOne(cascade = CascadeType.ALL)
 // @JsonIgnore
 // @JoinColumn(name = "customer_id",referencedColumnName = "cid")
  private Customer customer;
  
+
+
+ @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+ private List<BillPayment> billlist = new ArrayList<BillPayment>();
+ 
+ @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+ private List<Benificiary> benificiaryList = new ArrayList<>();
  
 
- 
 }
