@@ -26,8 +26,8 @@ public class TransactionController {
 	}
 	
 	
-	@GetMapping("/transactionlistbyDate/{L}")
-	public List<Transaction> getTransactionList2(@RequestParam String key, @PathVariable("L") String localDate) {
+	@GetMapping("/transactionlistbyDate")
+	public List<Transaction> getTransactionList2( @RequestParam String localDate,@RequestParam String key) {
 		
 		return trServices.viewAllTransactionByDate(key, localDate);
 	}

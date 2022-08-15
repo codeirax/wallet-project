@@ -30,11 +30,6 @@ public class WalletController {
   @Autowired
   private UserService uService;
   
-  
-  
-  
-  
-	
 	
 	@GetMapping("/walletbalance")
 	public double showWalletBalanceHandler(@RequestParam String key) {

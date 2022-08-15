@@ -3,10 +3,12 @@ package com.masai.services;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import com.masai.exceptions.NotFoundException;
@@ -45,29 +47,25 @@ public class TransactionServicesImpl implements TransactionSevices {
 	@Override
 	public List<Transaction> viewAllTransactionByDate(String key, String date) {
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-		
-		Date d; 
-		
-
+		DateTimeFormatter format; 
 		try {
-			d = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(date);  
+			 format= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
 		}catch (Exception e) {
 			throw new NotFoundException("Date didn't match");
-		}
-		
+		}	
 		List <Transaction>  transactionList = wallet.getTransactions();
 		
 		List <Transaction> trList2 = new ArrayList<Transaction>();
 		
 		for(Transaction tx : transactionList) {
-			if(tx.getTransactionDate().equals(d)) {
+			if(tx.getTransactionDate().equals(format)) {
 				trList2.add(tx);
 			}
 		}
 		if(trList2.size() == 0) {
 			throw new NotFoundException("Transaction not found as per given date");
 		}
-		
 		return trList2;
 	}
 

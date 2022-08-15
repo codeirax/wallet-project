@@ -33,7 +33,7 @@ public class GlobalExceptionhandler {
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> myExpHandler2(Exception ie,WebRequest wr)  {
-		System.out.println("inside myHandler2 method...");
+//		System.out.println("inside myHandler2 method...");
 		
 		MyErrorDetails err= new MyErrorDetails();
 		err.setTimestamp(LocalDateTime.now());

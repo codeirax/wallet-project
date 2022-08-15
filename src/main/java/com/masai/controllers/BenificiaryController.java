@@ -3,6 +3,7 @@ package com.masai.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,10 @@ public class BenificiaryController {
 		
 	}
 	
+	@DeleteMapping("/deletebenificiary")
+	public Benificiary deletebenificiary(@RequestParam String key,@RequestParam String name) {
+		return bService.deleteBenificiary(name, key);
+	}
 	
 	@GetMapping("/getBenificiaries")
 	public List<Benificiary> benificiaryListyHandler(@RequestParam String key) {
