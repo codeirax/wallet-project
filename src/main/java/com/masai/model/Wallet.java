@@ -24,7 +24,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Wallet {
@@ -33,15 +32,32 @@ public class Wallet {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer walletid;
   private double balance;
+  
  
- @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+ 
+ public Wallet() {
+	 
+//	  BankAccount bank = new BankAccount();
+//	  
+//	  int min = 200;
+//	  int max = 500;
+//	  int accNo = (int)(Math.random()*(max-min+1)+min);
+//	  bank.setAccountNo(accNo);
+//	  bank.setBankname("Wallet Bank");
+//	  bank.setIfscCode("WAL0003364");
+//	  bank.setBalance(0);
+//	  bankaccounts.add(bank);
+}
+ 
+
+@OneToMany(cascade = CascadeType.ALL)
  private List<BankAccount> bankaccounts = new ArrayList<BankAccount>();
 
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
  private List<Transaction> transactions = new ArrayList<Transaction>();
 
- @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
- private List<Benificiary> benificiaries = new ArrayList<Benificiary>();
+// @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
+// private List<Benificiary> benificiaries = new ArrayList<Benificiary>();
 
  
  @OneToOne(cascade = CascadeType.ALL)

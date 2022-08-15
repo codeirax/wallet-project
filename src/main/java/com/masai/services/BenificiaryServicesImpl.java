@@ -38,26 +38,26 @@ public class BenificiaryServicesImpl implements BenificiaryServices{
 	    Optional<Customer> optCustomer = 	cDao.findByMobileNumber(mobileNumber);
 	    
 	   
-	    if (optCustomer.isPresent()) {
-	    	List<Benificiary> list  = optCustomer.get().getWallet().getBenificiaries();
-	    	
-	    	for(Benificiary ben :list) {
-	    		if(ben.getMobileNumber().equals(mobileNumber))
-	    			return ben;
-	    	}
-	    }
-	    else 
-	    	throw new Exception();
-		 
+//	    if (optCustomer.isPresent()) {
+//	    	List<Benificiary> list  = optCustomer.get().getWallet().getBenificiaries();
+//	    	
+//	    	for(Benificiary ben :list) {
+//	    		if(ben.getMobileNumber().equals(mobileNumber))
+//	    			return ben;
+//	    	}
+//	    }
+//	    else 
+//	    	throw new Exception();
+//		 
 	    return null;
 	}
 
 	@Override
 	public List<Benificiary> viewAllBenificiary(Customer customer) throws Exception {
 		
-		List<Benificiary> list = customer.getWallet().getBenificiaries();
+		//List<Benificiary> list = customer.getWallet().getBenificiaries();
 		
-		return list;
+		return null;
 	}
 
 }
