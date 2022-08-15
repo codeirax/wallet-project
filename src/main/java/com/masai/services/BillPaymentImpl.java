@@ -10,10 +10,12 @@ import com.masai.exceptions.InsufficientAmountException;
 import com.masai.exceptions.NotFoundException;
 import com.masai.model.BankAccount;
 import com.masai.model.BillPayment;
+import com.masai.model.Transaction;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
 import com.masai.repository.BillPayementDao;
 import com.masai.repository.CustomerDao;
+import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDao;
 import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
 
@@ -28,6 +30,8 @@ public class BillPaymentImpl implements BillPaymentIntr{
 	BillPayementDao billDao;
 	@Autowired
 	BankAccountDao bDao;
+	@Autowired
+	TransactionDao trDao;
 	@Autowired
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
 	
@@ -44,6 +48,14 @@ public class BillPaymentImpl implements BillPaymentIntr{
 		w.setBalance(w.getBalance()-bill.getAmount());
 		w.getBilllist().add(bill);
 //		wDao.save(w);
+		Transaction tr = new Transaction();
+		tr.setAmount(bill.getAmount());
+		tr.setDescription("Payment Successfull..!");
+		tr.setTransactionDate(LocalDate.now());
+		tr.setTransactionType(bill.getBilltype());
+		tr.setWallet(w);
+		w.getTransactions().add(tr);
+		trDao.save(tr);
 		bill.setWallet(w);
 		billDao.save(bill);
 		return bill;

@@ -24,7 +24,7 @@ public interface TransactionSevices {
 	
 	public List<Transaction> viewAllTransaction(String key);
 	
-	public List<Transaction> viewAllTransactionByDate(String key, String date);
+	public List<Transaction> viewAllTransactionByDate(String key, String localDate);
 	
 	
 }

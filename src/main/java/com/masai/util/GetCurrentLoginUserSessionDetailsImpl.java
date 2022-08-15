@@ -27,7 +27,7 @@ public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUse
 		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
 		
 		if(!optional.isPresent()) {
-			throw new NotFoundException("Unauthorized");
+			throw new NotFoundException("Unauthorized Key");
 		}
 		
 		return optional.get();
@@ -39,7 +39,7 @@ public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUse
 		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
 		
 		if(!optional.isPresent()) {
-			throw new NotFoundException("Unauthorized");
+			throw new NotFoundException("Unauthorized Key");
 		}
 		
 		Integer customerId = optional.get().getCustomerId();
@@ -51,7 +51,7 @@ public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUse
 		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
 		
 		if(!optional.isPresent()) {
-			throw new NotFoundException("Unauthorized");
+			throw new NotFoundException("Unauthorized Key");
 		}
 		
 		Integer customerId = optional.get().getCustomerId();
@@ -67,7 +67,7 @@ public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUse
 		Optional<CurrentUserSession> optional = sessionDao.findByUuid(key);
 		
 		if(!optional.isPresent()) {
-			throw new NotFoundException("Unauthorized");
+			throw new NotFoundException("Unauthorized Key");
 		}
 		
 		Integer customerId = optional.get().getCustomerId();

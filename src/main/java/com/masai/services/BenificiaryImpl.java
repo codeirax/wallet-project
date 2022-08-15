@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
+import com.masai.model.BankAccount;
 import com.masai.model.Benificiary;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
@@ -49,7 +51,21 @@ public class BenificiaryImpl implements BenificiaryIntr {
 	@Override
 	public Benificiary deleteBenificiary(String name, String key) {
 		// TODO Auto-generated method stub
-		return null;
+		 Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
+		 
+			List<Benificiary> bflist = wallet.getBenificiaryList();
+			
+			for(Benificiary bf:bflist) {
+				if(bf.getName().equals(name)) {
+					bflist.remove(bf);
+					bfDao.delete(bf);
+					wDao.save(wallet);
+					return bf;	
+				}
+			}
+			
+			throw new InvalidAccountException("Check Account Name");
+
 	}
 
 	@Override
