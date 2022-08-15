@@ -45,7 +45,7 @@ public class WalletServiceImpl implements WalletServices{
 	 {
 		
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-		Customer c = getCurrentLoginUser.getCurrentCustomer(key);
+		
 	List<Benificiary> bList = wallet.getBenificiaryList();
 	
 	Benificiary bf = null;
@@ -63,8 +63,7 @@ public class WalletServiceImpl implements WalletServices{
    Transaction tr = new Transaction();
    tr.setTransactionDate(LocalDate.now());
    tr.setAmount(amount);
-   tr.setTranserfrom(c.getMobileNumber());
-   tr.setTransferredto(targetMobileNo);
+   tr.setDescription("Transfer to " + targetMobileNo);
    tr.setTransactionType("Fund Transfer");
    wallet.getTransactions().add(tr);
    tr.setWallet(wallet);
@@ -85,6 +84,8 @@ public class WalletServiceImpl implements WalletServices{
 		return balance;
 	}
 
+	
+	
 	@Override
 	public Customer depositAmount(double amount, String key) throws InsufficientAmountException {
 		// TODO Auto-generated method stub
@@ -98,7 +99,7 @@ public class WalletServiceImpl implements WalletServices{
 	
 	@Override
 	@Transactional
-	public String addMoneyToWallet(int bankAccountNumber,double amount, String key) throws InsufficientAmountException {
+	public String addMoneyToWallet(long bankAccountNumber,double amount, String key) throws InsufficientAmountException {
 		
 	   Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
 	   
@@ -111,8 +112,7 @@ public class WalletServiceImpl implements WalletServices{
 				  Transaction tr = new Transaction();
 				   tr.setTransactionDate(LocalDate.now());
 				   tr.setAmount(amount);
-				   tr.setTranserfrom(bank.getBankname());
-				   tr.setTransferredto("Wallet");
+				   tr.setDescription("Money added to wallet..");
 				   tr.setTransactionType("Add Money In Wallet");
 				   wallet.getTransactions().add(tr);
 				   tr.setWallet(wallet);

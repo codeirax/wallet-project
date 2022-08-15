@@ -15,13 +15,10 @@ import lombok.*;
 import lombok.NoArgsConstructor;
 
 @Data
-<<<<<<< HEAD
-=======
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
->>>>>>> master
 public class Benificiary {
 	
     @javax.persistence.Id
