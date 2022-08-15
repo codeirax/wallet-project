@@ -42,7 +42,7 @@ public class WalletController {
 	}
 	
 	@PostMapping("/addmoney/{accountNumber}/{amount}")
-	public String addMoneyToWallet(@PathVariable int accountNumber, @PathVariable double amount, @RequestParam String key) {
+	public String addMoneyToWallet(@PathVariable long accountNumber, @PathVariable double amount, @RequestParam String key) {
 		return wService.addMoneyToWallet( accountNumber, amount,key);
 		
 	}

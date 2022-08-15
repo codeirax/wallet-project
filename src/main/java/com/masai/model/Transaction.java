@@ -27,8 +27,7 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer transactionId;
 	private String transactionType;
-	private String transerfrom;
-	private String transferredto;
+    private String description;
 	private LocalDate  transactionDate;
 	private double amount;
 	

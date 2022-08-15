@@ -10,5 +10,5 @@ public interface AccountServicesIntr {
 	
 	public List<BankAccount> getAllBankAccounts(String key);
 	
-	public BankAccount removeBankAccount(String key,int accountNo) ;
+	public BankAccount removeBankAccount(String key,long accountNo) ;
 }

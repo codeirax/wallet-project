@@ -52,7 +52,7 @@ public class AccountServicesImpl implements AccountServicesIntr {
 	}
 	
 	
-	public BankAccount removeBankAccount(String key,int accountNo) {
+	public BankAccount removeBankAccount(String key,long accountNo) {
 		
 		 Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
 		 

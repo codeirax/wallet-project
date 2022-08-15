@@ -25,6 +25,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Wallet {
 	
@@ -35,20 +36,6 @@ public class Wallet {
   
  
  
- public Wallet() {
-	 
-//	  BankAccount bank = new BankAccount();
-//	  
-//	  int min = 200;
-//	  int max = 500;
-//	  int accNo = (int)(Math.random()*(max-min+1)+min);
-//	  bank.setAccountNo(accNo);
-//	  bank.setBankname("Wallet Bank");
-//	  bank.setIfscCode("WAL0003364");
-//	  bank.setBalance(0);
-//	  bankaccounts.add(bank);
-}
- 
 
 @OneToMany(cascade = CascadeType.ALL)
  private List<BankAccount> bankaccounts = new ArrayList<BankAccount>();
@@ -56,13 +43,9 @@ public class Wallet {
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
  private List<Transaction> transactions = new ArrayList<Transaction>();
 
-<<<<<<< HEAD
-// @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
-// private List<Benificiary> benificiaries = new ArrayList<Benificiary>();
 
  
-=======
->>>>>>> master
+
  @OneToOne(cascade = CascadeType.ALL)
 // @JsonIgnore
 // @JoinColumn(name = "customer_id",referencedColumnName = "cid")

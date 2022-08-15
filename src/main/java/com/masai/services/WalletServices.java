@@ -26,7 +26,7 @@ public interface WalletServices {
    public Customer depositAmount(double amount ,String key);
  
    
-   public String addMoneyToWallet(int bankAccountNumber,double amount,String key);
+   public String addMoneyToWallet(long bankAccountNumber,double amount,String key);
    
    
    
