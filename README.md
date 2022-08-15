@@ -18,6 +18,7 @@ doing transaction from wallet.
 - [Ritesh Kumar Jha](https://www.github.com/Riteshkumarjha98)
 - [P.Murali Krishna](https://www.github.com/purimetlamuralikrishna)
 - [Aadarsh Mukati](https://www.github.com/aadarsh11433)
+- [Amit Prakash](https://www.github.com/amitprakash28)
 
 # Tech Stack
 - Java
