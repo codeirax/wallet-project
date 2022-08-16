@@ -3,7 +3,6 @@ package com.masai.services;
 import org.springframework.stereotype.Service;
 
 import com.masai.model.BankAccount;
-import com.masai.model.Customer;
 
 @Service
 public interface WalletServices {
@@ -17,7 +16,7 @@ public interface WalletServices {
     
 //    public double showBankBalance(String key) throws NotFoundException;
     
-    public Customer transferToCustomerWallet(String targetMobileNumber,double amount, String key);
+    public String transferToCustomerWallet(String targetMobileNumber,double amount, String key);
    
    public BankAccount depositAmount(long accountNumber,double amount ,String key);
  
