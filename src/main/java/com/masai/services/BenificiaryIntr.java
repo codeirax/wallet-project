@@ -11,13 +11,14 @@ import com.masai.model.Benificiary;
 @Service
 public interface BenificiaryIntr {
 	
+	
 	public Benificiary addBenificiary(Benificiary benificary,String key);
 	
 	
 	
 	public List<Benificiary> viewAllBenificiary(String key);
 	
-	
+	public String removeBenificiary(String mobile,String key);
 	
 
 }

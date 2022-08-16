@@ -51,7 +51,7 @@ public class WalletController {
 	
 	
 	@PutMapping("/transfertocustomer/{m}/{a}")
-	public Customer customerToCustomerHandler(@PathVariable("m") String mobileNumber , @PathVariable("a") double amount ,@RequestParam String key ) {
+	public String customerToCustomerHandler(@PathVariable("m") String mobileNumber , @PathVariable("a") double amount ,@RequestParam String key ) {
 		
 		return wService.transferToCustomerWallet(mobileNumber, amount, key);
 	}
