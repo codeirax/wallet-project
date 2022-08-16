@@ -18,7 +18,7 @@ public interface BenificiaryIntr {
 	
 	public List<Benificiary> viewAllBenificiary(String key);
 	
-	
+	public String removeBenificiary(String mobile,String key);
 	
 
 }
