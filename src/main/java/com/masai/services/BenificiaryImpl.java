@@ -49,11 +49,9 @@ public class BenificiaryImpl implements BenificiaryIntr {
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
 		
 		wallet.getBenificiaryList().add(benificary);
-		benificary.setWallet(wallet);
-		bfDao.save(benificary);
 		
+		wDao.save(wallet);
 		
-		// TODO Auto-generated method stub
 		return benificary;
 	}
 
@@ -69,6 +67,25 @@ public class BenificiaryImpl implements BenificiaryIntr {
 	}
 	
 	
+	@Override
+	public String removeBenificiary(String mobile, String key) {
+		
+		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
+		
+		List<Benificiary> bfList = wallet.getBenificiaryList();
+		
+		for(Benificiary benfisiry:bfList) {
+			
+			if(benfisiry.getMobileNumber().equals(mobile)) {
+				bfList.remove(benfisiry);
+				bfDao.delete(benfisiry);
+				wDao.save(wallet);
+				return "Name: "+benfisiry.getName()+"\n"+"Mobile Number :"+benfisiry.getMobileNumber()+"\n"+"Added Successfully";
+			}
+		}
+		
+		throw new NotFoundException("Given Mobile Number Is in Benificiary List...");
+	}
 	
 	
 }

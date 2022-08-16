@@ -36,5 +36,12 @@ public class BenificiaryController {
 		
 	}
 	
+	@DeleteMapping("/deletebenificiary")
+	public String deleteBenificiaryHandler(@RequestParam String mobile, @RequestParam String key) {
+		
+	return bService.removeBenificiary(mobile, key);
+		
+	}
+	
 
 }
