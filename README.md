@@ -20,6 +20,18 @@ doing transaction from wallet.
 - [Aadarsh Mukati](https://www.github.com/aadarsh11433)
 - [Amit Prakash](https://www.github.com/amitprakash28)
 
+- **Services Offered**
+1. User can Login and Signup.
+2. Adding money to wallet from bank.
+3. Transfer money to different users.
+4. User can get all transaction history, bill payments.
+5. User can pay Bills
+
+- **Backend**
+1. Built authentication while login and logout using key.
+2. Stored the data on MySQL and used it for Authentication.
+
+
 # Tech Stack
 - Java
 - Hibernate
