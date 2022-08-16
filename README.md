@@ -98,6 +98,10 @@ doing transaction from wallet.
 ```
 
 
+# ER Diagram :
+
+![ER Diagram : ](https://www.linkpicture.com/q/Er_Diagram_wallet_application.jpg)
+
 
 
 
