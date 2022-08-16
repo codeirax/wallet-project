@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.masai.model.Benificiary;
+import com.masai.model.Beneficiary;
 
 
 
@@ -12,11 +12,11 @@ import com.masai.model.Benificiary;
 public interface BenificiaryIntr {
 	
 	
-	public Benificiary addBenificiary(Benificiary benificary,String key);
+	public Beneficiary addBenificiary(Beneficiary benificary,String key);
 	
 	
 	
-	public List<Benificiary> viewAllBenificiary(String key);
+	public List<Beneficiary> viewAllBenificiary(String key);
 	
 	
 	

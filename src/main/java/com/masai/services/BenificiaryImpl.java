@@ -12,7 +12,7 @@ import com.masai.exceptions.InvalidAccountException;
 import com.masai.exceptions.NotFoundException;
 import com.masai.exceptions.UserAlreadyExistWithMobileNumber;
 import com.masai.model.BankAccount;
-import com.masai.model.Benificiary;
+import com.masai.model.Beneficiary;
 import com.masai.model.Wallet;
 import com.masai.repository.BankAccountDao;
 import com.masai.repository.BenificiaryDao;
@@ -39,9 +39,9 @@ public class BenificiaryImpl implements BenificiaryIntr {
     private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
   
 	@Override
-	public Benificiary addBenificiary(Benificiary benificary, String key) {
+	public Beneficiary addBenificiary(Beneficiary benificary, String key) {
 		
-		Optional<Benificiary> optBenificiary = bfDao.findByMobileNumber(benificary.getMobileNumber());
+		Optional<Beneficiary> optBenificiary = bfDao.findByMobileNumber(benificary.getMobileNumber());
 		if(optBenificiary.isPresent()) {
 			throw new UserAlreadyExistWithMobileNumber("Benificiary already added..");
 		}
@@ -60,9 +60,9 @@ public class BenificiaryImpl implements BenificiaryIntr {
 
 
 	@Override
-	public List<Benificiary> viewAllBenificiary(String key) {
+	public List<Beneficiary> viewAllBenificiary(String key) {
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-		List<Benificiary> bfList = wallet.getBenificiaryList();
+		List<Beneficiary> bfList = wallet.getBenificiaryList();
 		if( bfList.size()<=0 ) 
 			throw new NotFoundException("Benificiaries details not found..");
 		return bfList;
