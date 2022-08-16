@@ -57,7 +57,11 @@ public class WalletServiceImpl implements WalletServices{
    if(bf == null)
 	 throw new NotFoundException("Benificiary not found with this mobile number");
    
-   wallet.setBalance(wallet.getBalance() - amount);
+   if(wallet.getBalance() <= amount) {
+	   throw new InsufficientAmountException("Insufficient balance in your wallet");
+   }
+   wallet.setBalance(wallet.getBalance() - amount); // deducting money from wallet source 
+   
    Transaction tr = new Transaction();
    tr.setTransactionDate(LocalDate.now());
    tr.setAmount(amount);
@@ -68,7 +72,7 @@ public class WalletServiceImpl implements WalletServices{
    trDao.save(tr);
     wDao.save(wallet);
     
-   return "Fund transfer to " + bf.getName();
+   return "Fund transfer to " + bf.getName() +"\n"+"Your remaining wallet balance is : "+wallet.getBalance();
 	
 	}
 
@@ -100,6 +104,7 @@ public class WalletServiceImpl implements WalletServices{
 	  
 	  
 	  BankAccount b=null;
+	  
 	  for(BankAccount bank:banks) {
 		  if(bank.getAccountNo() == accountNumber) {
 			 b=bank;
@@ -170,7 +175,7 @@ public class WalletServiceImpl implements WalletServices{
 
 	 @Transactional
 	@Override
-	public Customer transferToCustomerWallet(String targetMobileNumber,double amount, String key) {
+	public String transferToCustomerWallet(String targetMobileNumber,double amount, String key) {
 		
 		
 	 Customer targetCustomer =	cDao.findByMobileNumber(targetMobileNumber).get();
@@ -203,7 +208,7 @@ public class WalletServiceImpl implements WalletServices{
 		
 	
 		
-		return targetCustomer;
+		return "Name : "+  targetCustomer.getName() +"\n" + "Mobile Number "+targetCustomer.getMobileNumber();
 	}
 
 	

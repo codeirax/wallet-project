@@ -11,6 +11,7 @@ import com.masai.model.Benificiary;
 @Service
 public interface BenificiaryIntr {
 	
+	
 	public Benificiary addBenificiary(Benificiary benificary,String key);
 	
 	
