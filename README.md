@@ -40,8 +40,6 @@ doing transaction from wallet.
 - Beneficiary Module
 - Bank Account Module
 
-## Admin Features
-- Admin can access all the services of wallet.
 
 ## User Features
 - customer can validate their login.
