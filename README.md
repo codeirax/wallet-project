@@ -35,7 +35,6 @@ doing transaction from wallet.
 # Tech Stack
 - Java
 - Hibernate
-- Spring Framework
 - Spring Boot
 - Spring Data JPA
 - MySQL
@@ -89,7 +88,7 @@ doing transaction from wallet.
 - Update the port number, username and password as per your local database configuration.
 
 ```
-    server.port=8888
+    server.port=8080
 
     spring.datasource.url=jdbc:mysql://localhost:3306/walletdb;
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
