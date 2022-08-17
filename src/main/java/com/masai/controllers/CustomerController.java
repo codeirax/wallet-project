@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -52,41 +55,53 @@ public class CustomerController {
 	
 	  // for user Login
 		@PostMapping(value = "/login")
-		public String logInCustomer(@Valid @RequestBody LoginDTO customerDTO) {
-			return customerLogin.logIntoAccount(customerDTO);
+		public ResponseEntity<String> logInCustomer(@Valid @RequestBody LoginDTO customerDTO) {
+			String s = customerLogin.logIntoAccount(customerDTO);
+			return new ResponseEntity<>(s,HttpStatus.ACCEPTED);
 		}
 		
 		// for user Logout
 		@PatchMapping(value = "/logout")
-		public String logOutCustomer(@RequestParam(required = false) String key) {
-			return customerLogin.logOutFromAccount(key);
+		public ResponseEntity<String> logOutCustomer(@RequestParam(required = false) String key) {
+			String s = customerLogin.logOutFromAccount(key);
+			return new ResponseEntity<>(s,HttpStatus.ACCEPTED);
 		}
 
 		// to register user
-		@PostMapping(value = "/addcustomer")
-		public Customer addCustomer(@Valid @RequestBody Customer customer) {
-			return customerServiceImpl.createCustomer(customer);
+		@PostMapping(value = "/customer")
+		public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer) {
+
+			Customer custmer = customerServiceImpl.createCustomer(customer);
+
+			return new ResponseEntity<Customer>(custmer, HttpStatus.CREATED);
 		}
 		
 		// To update existing user details by passing its login key
 		@PutMapping(value = "/customer")
-		public Customer updateCustomer(@Valid @RequestBody Customer customer, @RequestParam(required = false) String key) {
-			return customerServiceImpl.updateCustomer(customer, key);
+		public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer,
+				@RequestParam(required = false) String key) {
+			Customer fetched_customer = customerServiceImpl.updateCustomer(customer, key);
+
+			return new ResponseEntity<Customer>(fetched_customer, HttpStatus.ACCEPTED);
 		}
-		
+
 		
 		// To delete existing user details by passing its login key
 		@DeleteMapping(value = "/customer")
-		public Customer deleteCustomer(@RequestParam(required = false) String key) {
-			return customerServiceImpl.deleteCustomer(key);
+		public ResponseEntity<Customer> deleteCustomer(@RequestParam(required = false) String key) {
+			Customer deleted_customer = customerServiceImpl.deleteCustomer(key);
+
+			return new ResponseEntity<Customer>(deleted_customer, HttpStatus.ACCEPTED);
 		}
-		
 	
 		
 		
 		@PostMapping("/addaccount")
-		public BankAccount AccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
-			return accountServicesIntr.addAccount(bank, key);
+		public ResponseEntity<BankAccount> AccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
+			
+			BankAccount b = accountServicesIntr.addAccount(bank, key); 
+			
+			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
 			
 			
 		}
@@ -94,17 +109,19 @@ public class CustomerController {
 
 		
 		@DeleteMapping("/accounts")
-		public BankAccount removeBankAccountHandler(@RequestParam String key,@RequestParam Integer accountNo ) {
+		public ResponseEntity<BankAccount> removeBankAccountHandler(@RequestParam String key,@RequestParam Integer accountNo ) {
 													                 
-			return accountServicesIntr.removeBankAccount(key, accountNo);
+			BankAccount b = accountServicesIntr.removeBankAccount(key, accountNo);
+			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
 		}
 		
 		
 		// add beneficiary
 		@PostMapping("/addbenificiary")
-		public Beneficiary addBenificiaryHandler(@Valid @RequestBody Beneficiary benificiary, @RequestParam String key) {
+		public ResponseEntity<Beneficiary> addBenificiaryHandler(@Valid @RequestBody Beneficiary benificiary, @RequestParam String key) {
 			
-		return bService.addBenificiary(benificiary, key);
+			Beneficiary b = bService.addBenificiary(benificiary, key);
+		  return new ResponseEntity<Beneficiary>(b,HttpStatus.CREATED);
 			
 		}
 		

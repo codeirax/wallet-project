@@ -3,6 +3,8 @@ package com.masai.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ public class GetDetailsController {
 	private CustomerServiceIntr customerServiceImpl;
 
     @Autowired
-   AccountServicesIntr accountServicesIntr;
+    AccountServicesIntr accountServicesIntr;
 	
 	@Autowired
 	private WalletServices wService;
@@ -42,37 +44,44 @@ public class GetDetailsController {
 	
 	// To get details of current user by passing its login key
 	@GetMapping(value = "/customer")
-	public Customer getCustomerDetails(@RequestParam(required = false) String key) {
-		return customerServiceImpl.getCustomerDetails(key);
+	public ResponseEntity<Customer> getCustomerDetails(@RequestParam(required = false) String key) {
+		Customer fetched_customer = customerServiceImpl.getCustomerDetails(key);
+
+		return new ResponseEntity<Customer>(fetched_customer, HttpStatus.ACCEPTED);
 	}
 	
 	// list of banks
 	
 	@GetMapping("/accounts")
-	public List<BankAccount> listAccountHandler(@RequestParam String key){
-		return accountServicesIntr.getAllBankAccounts(key);
+	public ResponseEntity<List<BankAccount>> listAccountHandler(@RequestParam String key){
+		List<BankAccount> b = accountServicesIntr.getAllBankAccounts(key);
+		return new ResponseEntity<List<BankAccount>>(b,HttpStatus.ACCEPTED);
 	}
 	
 	
 	// list of bills
 	@GetMapping("/billlist")
-	public List<BillPayment> getallbills(@RequestParam String key){
-		return billservice.billList(key);
+	public ResponseEntity<List<BillPayment>> getallbills(@RequestParam String key){
+		List<BillPayment> list= billservice.billList(key);
+		return new ResponseEntity<List<BillPayment>>(list, HttpStatus.ACCEPTED);
 	}
 	
 
 	//list of transaction
 	@GetMapping("/transactionlist")
-	public List<Transaction> getTransactionList(@RequestParam String key) {
+	public ResponseEntity<List<Transaction>> getTransactionList(@RequestParam String key) {
 		
-		return trServices.viewAllTransaction(key);
+		List<Transaction> list =  trServices.viewAllTransaction(key);
+		return new ResponseEntity<List<Transaction>>(list,HttpStatus.ACCEPTED);
 	}
 	
 	
 	// customer list
 	@GetMapping(value = "/customers")
-	public List<Customer> getAllCustomersDetailsHandler(){
-		return customerServiceImpl.getCustomerList();
+	public ResponseEntity<List<Customer>> getAllCustomersDetailsHandler() {
+		List<Customer> list = customerServiceImpl.getCustomerList();
+		
+		return new ResponseEntity<List<Customer>>(list, HttpStatus.ACCEPTED);
 	}
 	
 
@@ -80,16 +89,17 @@ public class GetDetailsController {
 	//beneficiary list
 	
 	@GetMapping("/getBenificiaries")
-	public List<Beneficiary> beneficiaryListHandler(@RequestParam String key) {
+	public ResponseEntity< List<Beneficiary>> beneficiaryListHandler(@RequestParam String key) {
 		
-	return bService.viewAllBenificiary(key);
-		
+		 List<Beneficiary> list = bService.viewAllBenificiary(key);
+		 return new ResponseEntity< List<Beneficiary>>(list, HttpStatus.ACCEPTED);
 	}
 	
 	// show wallet balance
 	@GetMapping("/walletbalance")
-	public double showWalletBalanceHandler(@RequestParam String key) {
-		return wService.showWalletBalance(key);
+	public ResponseEntity<Double> showWalletBalanceHandler(@RequestParam String key) {
+		Double d= wService.showWalletBalance(key);
+		return new ResponseEntity<Double>(d,HttpStatus.ACCEPTED);
 	}
 
 }
