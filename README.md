@@ -8,6 +8,7 @@ mobile recharge, gas bill payment, electric bill payment and many more transacti
 doing transaction from wallet.
 
 
+<br />
 
 ### This is a collaborative project, completed by a team of 6 backend developers at Masai School.
 
@@ -32,14 +33,32 @@ doing transaction from wallet.
 2. Stored the data on MySQL and used it for Authentication.
 
 
+<br />
+
+
 # Tech Stack
-- Java
-- Hibernate
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- Swagger UI
-- Maven
+
+<img align="left" src="https://1000logos.net/wp-content/uploads/2020/09/Java-Logo.png" alt="drawing" width="100"/>
+<img align="left"  src="https://download.logo.wine/logo/Spring_Framework/Spring_Framework-Logo.wine.png" alt="drawing" width="100"/>
+<img src="https://download.logo.wine/logo/MySQL/MySQL-Logo.wine.png" alt="drawing" width="100"/>
+
+
+<img align = "left" src="https://www.dariawan.com/media/images/tech-spring-boot.width-1024.png" alt="drawing" width="100"/>
+<img align="left"  src="https://upload.wikimedia.org/wikipedia/commons/2/22/Hibernate_logo_a.png" alt="drawing" width="100"/>
+<img  align="left" src="https://miro.medium.com/max/818/1*zc-LgogGtr7fFHF9e1M8wA.png" alt="drawing" width="100"/>
+
+<img src="https://maven.apache.org/images/maven-logo-white-on-black.purevec.svg" alt="drawing" width="100"/>
+
+
+<img src="https://zooz.github.io/predator/images/restapi.png" alt="drawing" width="100"/>
+
+
+
+<br />
+
+
+
+
 
 # Modules
 
@@ -52,8 +71,14 @@ doing transaction from wallet.
 - Bank Account Module
 
 
+<br />
+
 ## User Features
 - customer can validate their login.
+
+
+<br />
+
 
 ## Customer Features
 - Customer can login in the application and update their information using their username and password.
@@ -61,6 +86,9 @@ doing transaction from wallet.
 - Customer can delete account from wallet.
 - Customer can view account of wallet.
 - Customer can view list of all account to wallet.
+
+
+<br />
 
 ## Wallet Features
 - First login in the application by using their username and password.
@@ -71,10 +99,16 @@ doing transaction from wallet.
 - Customer can deposit amount from wallet account.
 
 
+
+<br />
+
 ## Bill Payment Features
 - Customer can add bill payment.
 - Customer can view bill payment.
 
+
+
+<br />
 
 ## Transaction Features
 - Customer can add new transaction.
@@ -82,6 +116,9 @@ doing transaction from wallet.
 - Customer can view transaction by date.
 - Customer can view lis of all transaction.
 
+
+
+<br />
 
 # Installation & Run
  - Before running the API server, you should update the database config inside the application.properties file.
