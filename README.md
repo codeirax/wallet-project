@@ -99,6 +99,13 @@ doing transaction from wallet.
 - Customer can deposit amount from wallet account.
 
 
+<br />
+
+
+## Bank Accounts Features
+- Can add,delete,update Bank Accounts in their wallet
+- Can transfer money from Bank Accounts to wallet
+
 
 <br />
 
