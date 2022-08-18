@@ -13,6 +13,7 @@ import com.masai.model.BankAccount;
 import com.masai.model.Beneficiary;
 import com.masai.model.BillPayment;
 import com.masai.model.Customer;
+import com.masai.model.LogDetails;
 import com.masai.model.Transaction;
 import com.masai.services.AccountServicesIntr;
 import com.masai.services.BeneficiaryIntr;
@@ -20,6 +21,8 @@ import com.masai.services.BillPaymentImpl;
 import com.masai.services.CustomerServiceIntr;
 import com.masai.services.TransactionSevices;
 import com.masai.services.WalletServices;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class GetDetailsController {
@@ -41,6 +44,18 @@ public class GetDetailsController {
 	
 	@Autowired
 	private BillPaymentImpl billservice;
+	
+	@Autowired
+	private com.masai.services.LogDetails logDetails;
+	
+	// to get all log details
+	
+	@GetMapping("/logdetails")
+	public ResponseEntity<List<LogDetails> > getListOfLogDetails(){
+	  List<LogDetails>	list = logDetails.logDetailsList();
+	  
+	  return new ResponseEntity<>(list,HttpStatus.ACCEPTED);
+	}
 	
 	// To get details of current user by passing its login key
 	@GetMapping(value = "/customer")
