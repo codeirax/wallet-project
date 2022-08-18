@@ -22,15 +22,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Benificiary {
+public class Beneficiary {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bid;
     
-//    @NotNull(message = "Name is required")
+    @NotNull(message = "Name is required")
 	private String name;
-//	@Pattern(regexp = "[789]{1}[0-9]{9}")
+    @NotNull
+	@Pattern(regexp = "[789]{1}[0-9]{9}")
 	private String mobileNumber;
 	
 	@JsonIgnore

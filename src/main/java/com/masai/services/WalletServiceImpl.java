@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.masai.exceptions.InsufficientAmountException;
 import com.masai.exceptions.NotFoundException;
 import com.masai.model.BankAccount;
-import com.masai.model.Benificiary;
+import com.masai.model.Beneficiary;
 import com.masai.model.Customer;
 import com.masai.model.Transaction;
 import com.masai.model.Wallet;
@@ -44,11 +44,11 @@ public class WalletServiceImpl implements WalletServices{
 		
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
 		
-	List<Benificiary> bList = wallet.getBenificiaryList();
+	List<Beneficiary> bList = wallet.getBenificiaryList();
 	
-	Benificiary bf = null;
+	Beneficiary bf = null;
 	
-   for(Benificiary b:bList) {
+   for(Beneficiary b:bList) {
 	   if(b.getMobileNumber().equals(targetMobileNo)) {
 		   bf = b;
 	   }
@@ -208,7 +208,7 @@ public class WalletServiceImpl implements WalletServices{
 		
 	
 		
-		return "Name : "+  targetCustomer.getName() +"\n" + "Mobile Number "+targetCustomer.getMobileNumber();
+		return amount + "transfered to " + tWallet.getCustomer().getName();
 	}
 
 	
