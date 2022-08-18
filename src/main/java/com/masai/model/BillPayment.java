@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,10 +26,10 @@ public class BillPayment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer billid;
 	
-	@NotEmpty(message = "Bill type required")
+	
 	private String billtype;
 	
-	@NotEmpty(message = "Please enter amount")
+	@NotNull
 	private Double amount;
     private LocalDate billdate;
   

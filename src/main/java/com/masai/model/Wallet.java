@@ -57,7 +57,7 @@ public class Wallet {
  private List<BillPayment> billlist = new ArrayList<BillPayment>();
  
  @OneToMany(cascade = CascadeType.ALL,mappedBy = "wallet")
- private List<Benificiary> benificiaryList = new ArrayList<>();
+ private List<Beneficiary> benificiaryList = new ArrayList<>();
  
 
 }
