@@ -62,11 +62,13 @@ public class CustomerController {
 		}
 		
 		// for user Logout
-		@PatchMapping(value = "/logout")
+		@PostMapping(value = "/logout")
 		public ResponseEntity<String> logOutCustomer(@RequestParam(required = false) String key) {
 			String s = customerLogin.logOutFromAccount(key);
 			return new ResponseEntity<>(s,HttpStatus.ACCEPTED);
 		}
+		
+		
 
 		// to register user
 		@PostMapping(value = "/customer")
