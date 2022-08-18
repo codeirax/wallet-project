@@ -12,8 +12,10 @@ import com.masai.exceptions.NotFoundException;
 import com.masai.exceptions.UserAlreadyExistWithMobileNumber;
 import com.masai.model.CurrentUserSession;
 import com.masai.model.Customer;
+import com.masai.model.LogDetails;
 import com.masai.model.LoginDTO;
 import com.masai.repository.CustomerDao;
+import com.masai.repository.LogDetailsDao;
 import com.masai.repository.SessionDao;
 import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
 
@@ -28,6 +30,9 @@ public class CustomerLoginImpl implements CustomerLogIntr{
 	private  SessionDao sessionDao;
 	@Autowired
 	private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
+	
+	@Autowired
+	private LogDetailsDao logDetailsDao;
 	
 	
 	@Override
@@ -57,6 +62,14 @@ public class CustomerLoginImpl implements CustomerLogIntr{
 			
 			CurrentUserSession currentUserSession = new CurrentUserSession(newCustomer.getCustomerId(), key, LocalDateTime.now());			
 			sessionDao.save(currentUserSession);
+			   LogDetails logD = new LogDetails();
+			   
+			   logD.setCid(currentUserSession.getId());
+			   logD.setLocalDateTime(currentUserSession.getLocalDateTime());
+			   logD.setLogtype("Log In");
+			   logD.setUuid(currentUserSession.getUuid());
+			   logDetailsDao.save(logD);
+			
 
 			return currentUserSession.toString();
 		}
@@ -77,6 +90,16 @@ public class CustomerLoginImpl implements CustomerLogIntr{
 		}
 		
 		CurrentUserSession currentUserSession = getCurrentLoginUser.getCurrentUserSession(key);
+		
+		   LogDetails logD = new LogDetails();
+		   
+		   logD.setCid(currentUserSession.getId());
+		   logD.setLocalDateTime(currentUserSession.getLocalDateTime());
+		   logD.setLogtype("Log Out");
+		   logD.setUuid(currentUserSession.getUuid());
+		   logDetailsDao.save(logD);
+		
+		
 		sessionDao.delete(currentUserSession);
 		
 		return "Logged Out...";
