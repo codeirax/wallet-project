@@ -143,7 +143,7 @@ doing transaction from wallet.
 
 # ER Diagram :
 
-![ER Diagram : ](https://www.linkpicture.com/q/Er_Diagram_wallet_application.jpg)
+![ER Diagram : ](https://i.postimg.cc/LXTNjVhc/ER-Diagram.png)
 
 
 
