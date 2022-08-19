@@ -11,4 +11,6 @@ public interface AccountServicesIntr {
 	public List<BankAccount> getAllBankAccounts(String key);
 	
 	public BankAccount removeBankAccount(String key,long accountNo) ;
+	
+	public BankAccount updateBankAccount(String key,BankAccount bank) ;
 }
