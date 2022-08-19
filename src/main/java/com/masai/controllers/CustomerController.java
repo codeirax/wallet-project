@@ -112,11 +112,21 @@ public class CustomerController {
 
 		
 		@DeleteMapping("/accounts")
-		public ResponseEntity<BankAccount> removeBankAccountHandler(@RequestParam String key,@RequestParam Integer accountNo ) {
+		public ResponseEntity<BankAccount> removeBankAccountHandler(@RequestParam String key,@RequestParam long accountNo ) {
 													                 
 			BankAccount b = accountServicesIntr.removeBankAccount(key, accountNo);
 			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
 		}
+		
+		@PostMapping("/updateaccount")
+		public ResponseEntity<BankAccount> updateAccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
+			
+			BankAccount b = accountServicesIntr.updateBankAccount(key,bank); 
+			
+			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
+				
+		}
+		
 		
 		
 		// add beneficiary

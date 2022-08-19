@@ -20,18 +20,10 @@ import lombok.NoArgsConstructor;
 public class BankAccount {
 	
 	@Id
-	private Integer accountNo;
+	private long accountNo;
 	private String ifscCode;
 	private String bankname;
 	private double balance;
 	
-	
-//	@JsonIgnore
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	private Wallet wallet;
-	
-	
-	
-
 
 }
