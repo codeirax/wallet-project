@@ -31,20 +31,21 @@ public class AccountServicesImpl implements AccountServicesIntr {
 	@Override
 	public BankAccount addAccount(BankAccount bank, String key) {
 		
-		boolean flag = 	bDao.existsById(bank.getAccountNo());
-		
-		
-		if(flag) {
-			throw new UserAlreadyExistWithMobileNumber("This bank account is already added..");
-		}
-		
 		 Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
-
-		  
-		   wallet.getBankaccounts().add(bank);
-			wDao.save(wallet);
+		 List<BankAccount> banks = wallet.getBankaccounts();
+		 
+		 for(BankAccount ibank:banks) {
+				if(ibank.getAccountNo()==bank.getAccountNo()) {
+					
+					throw new UserAlreadyExistWithMobileNumber("This bank account is already added..");
+	
+				}
+		}
+		 
+		banks.add(bank);
+		wDao.save(wallet);
+		return bank;
 			
-			return bank;
 		
 	}
      
@@ -64,7 +65,7 @@ public class AccountServicesImpl implements AccountServicesIntr {
 	
 	public BankAccount removeBankAccount(String key,long accountNo) {
 		
-		 Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
+		Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
 		 
 		List<BankAccount> banks = wallet.getBankaccounts();
 		
@@ -82,7 +83,26 @@ public class AccountServicesImpl implements AccountServicesIntr {
 	}
 	
 	
-	
+	public BankAccount updateBankAccount(String key,BankAccount uBank) {
+		
+		Wallet wallet =	getCurrentLoginUser.getCurrentUserWallet(key);
+		 
+		List<BankAccount> banks = wallet.getBankaccounts();
+		
+		for(BankAccount bank:banks) {
+			if(bank.getAccountNo()==uBank.getAccountNo()) {
+				
+				bank.setAccountNo(uBank.getAccountNo());
+				bank.setIfscCode(uBank.getIfscCode());
+				bank.setBankname(uBank.getBankname());
+				bDao.save(bank);
+				return bank;	
+			}
+		}
+		
+		throw new InvalidAccountException("Check Account Number");
+		
+	}
 	
 	  
 }
