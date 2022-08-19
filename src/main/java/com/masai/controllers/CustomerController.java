@@ -55,14 +55,14 @@ public class CustomerController {
 	private CustomerLoginImpl customerLogin;
 	
 	  // for user Login
-		@PostMapping(value = "/login")
+		@PostMapping(value = "customer/login")
 		public ResponseEntity<String> logInCustomer(@Valid @RequestBody LoginDTO customerDTO) {
 			String s = customerLogin.logIntoAccount(customerDTO);
 			return new ResponseEntity<>(s,HttpStatus.ACCEPTED);
 		}
 		
 		// for user Logout
-		@PostMapping(value = "/logout")
+		@PostMapping(value = "customer/logout")
 		public ResponseEntity<String> logOutCustomer(@RequestParam(required = false) String key) {
 			String s = customerLogin.logOutFromAccount(key);
 			return new ResponseEntity<>(s,HttpStatus.ACCEPTED);
@@ -118,7 +118,7 @@ public class CustomerController {
 			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
 		}
 		
-		@PostMapping("/updateaccount")
+		@PutMapping("/updateaccount")
 		public ResponseEntity<BankAccount> updateAccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
 			
 			BankAccount b = accountServicesIntr.updateBankAccount(key,bank); 
