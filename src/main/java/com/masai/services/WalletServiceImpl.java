@@ -173,7 +173,7 @@ public class WalletServiceImpl implements WalletServices{
 		
 	}
 
-	 @Transactional
+	@Transactional
 	@Override
 	public String transferToCustomerWallet(String targetMobileNumber,double amount, String key) {
 		

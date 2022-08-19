@@ -60,7 +60,9 @@ public class BenificiaryImpl implements BeneficiaryIntr {
 
 	@Override
 	public List<Beneficiary> viewAllBenificiary(String key) {
+		
 		Wallet wallet = getCurrentLoginUser.getCurrentUserWallet(key);
+		
 		List<Beneficiary> bfList = wallet.getBenificiaryList();
 		if( bfList.size()<=0 ) 
 			throw new NotFoundException("Benificiaries details not found..");

@@ -100,7 +100,7 @@ public class CustomerLoginImpl implements CustomerLogIntr{
 		   logDetailsDao.save(logD);
 		
 		
-		sessionDao.delete(currentUserSession);
+		  sessionDao.delete(currentUserSession);
 		
 		return "Logged Out...";
 	}

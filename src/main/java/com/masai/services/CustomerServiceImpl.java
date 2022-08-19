@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.masai.exceptions.NotFoundException;
 import com.masai.exceptions.UserAlreadyExistWithMobileNumber;
+import com.masai.model.CurrentUserSession;
 import com.masai.model.Customer;
 import com.masai.model.Wallet;
 import com.masai.repository.CustomerDao;
+import com.masai.repository.SessionDao;
 import com.masai.repository.WalletDao;
 import com.masai.util.GetCurrentLoginUserSessionDetailsImpl;
 import com.masai.util.GetCurrentLoginUserSessionDetailsIntr;
@@ -20,6 +22,9 @@ public class CustomerServiceImpl implements CustomerServiceIntr{
 
 	@Autowired
 	private CustomerDao customerDao;
+	
+	@Autowired
+	private SessionDao sessionDao;
 	
 	@Autowired
 	private GetCurrentLoginUserSessionDetailsIntr getCurrentLoginUser;
@@ -68,8 +73,11 @@ public class CustomerServiceImpl implements CustomerServiceIntr{
 	@Override
 	public Customer deleteCustomer(String key) {
 		
-		Customer customer = getCurrentLoginUser.getCurrentCustomer(key);		
+		Customer customer = getCurrentLoginUser.getCurrentCustomer(key);	
+	CurrentUserSession	currentUserSession =	getCurrentLoginUser.getCurrentUserSession(key);
 		customerDao.delete(customer);
+		
+		sessionDao.delete(currentUserSession);
 		return customer;
 	}
 
