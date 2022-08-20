@@ -1,12 +1,8 @@
 
 # REST API for Online Payment Wallet Application
 
-We have create a REST API for online payment wallet application which can be used by customers for  different services like creating new wallet, add money into
-wallet, deposit money to wallet, update their wallet by creating account or directly by login first if they are existing users. It's divided in different parts 
-Bill payment section users can add different bill payment or view their view payment and in transaction session they can add ,view and do different transaction like
-mobile recharge, gas bill payment, electric bill payment and many more transactions and bill payment services, they can also add , delete and view beneficiary before 
-doing transaction from wallet.
-
+This project is about Building REST APIs for online payment wallet application which can be used by customers for  different services.    
+ The unique features of this project is We have implemented user validation at every step that will based upon authenticated unique key, for every user. And we are are following proper architecture based design that's allow us to write neat and clean code.
 
 <br />
 
@@ -62,7 +58,8 @@ doing transaction from wallet.
 
 # Modules
 
-- Login Module
+- Login and Signup Module
+- Wallet Module
 - Account Module
 - Customer Module
 - Bill Payment Module
@@ -91,13 +88,11 @@ doing transaction from wallet.
 <br />
 
 ## Wallet Features
-- First login in the application by using their username and password.
-- Customer can create new wallet account.
-- Customer can check balance of their wallet account.
-- Customer can add money to  wallet account.
-- Customer can update their wallet account.
-- Customer can deposit amount from wallet account.
-
+- User can create new wallet account.
+- Track a user’s wallet balance.
+- User can add money to  wallet account.
+- Allow a user to transfer money to another user/account.
+- Keep a history of last N transactions.
 
 <br />
 
