@@ -3,6 +3,8 @@
 
 This project is about Building REST APIs for online payment wallet application which can be used by customers for  different services.    
  The unique features of this project is We have implemented user validation at every step that will based upon authenticated unique key, for every user. And we are are following proper architecture based design that's allow us to write neat and clean code.
+ 
+ We have wrote the bussiness logic in such a way that at any step we can easily access current customer with the help of key and we can implement the required logic as per need.
 
 <br />
 
