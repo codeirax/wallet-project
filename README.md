@@ -140,7 +140,9 @@ This project is about Building REST APIs for online payment wallet application w
 
 # ER Diagram :
 
-![ER Diagram : ](https://i.postimg.cc/LXTNjVhc/ER-Diagram.png)
+
+
+![erd_final_walletapp](https://user-images.githubusercontent.com/90818364/185763697-0448e426-d5db-429f-84f6-e5774ebc9491.png)
 
 
 
