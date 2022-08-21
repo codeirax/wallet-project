@@ -110,7 +110,7 @@ public class CustomerController {
 		}
 		
 
-		
+		// delete bank account
 		@DeleteMapping("/accounts")
 		public ResponseEntity<BankAccount> removeBankAccountHandler(@RequestParam String key,@RequestParam long accountNo ) {
 													                 
@@ -118,6 +118,7 @@ public class CustomerController {
 			return new ResponseEntity<BankAccount>(b,HttpStatus.ACCEPTED);
 		}
 		
+		// update bank account
 		@PutMapping("/updateaccount")
 		public ResponseEntity<BankAccount> updateAccountHandler(@RequestBody  BankAccount bank, @RequestParam String key) {
 			

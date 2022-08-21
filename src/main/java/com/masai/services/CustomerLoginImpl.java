@@ -94,7 +94,7 @@ public class CustomerLoginImpl implements CustomerLogIntr{
 		   LogDetails logD = new LogDetails();
 		   
 		   logD.setCid(currentUserSession.getId());
-		   logD.setLocalDateTime(currentUserSession.getLocalDateTime());
+		   logD.setLocalDateTime(currentUserSession.getLocalDateTime().now());
 		   logD.setLogtype("Log Out");
 		   logD.setUuid(currentUserSession.getUuid());
 		   logDetailsDao.save(logD);
