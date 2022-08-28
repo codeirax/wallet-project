@@ -36,7 +36,7 @@ public class Customer {
 	@NotEmpty(message = "Name could not be null")
 	private String name;
   
-	@Pattern(regexp = "[789]{1}[0-9]{9}")
+	@Pattern(regexp = "[6789]{1}[0-9]{9}")
 	private String mobileNumber;
 	
 	@NotNull(message = "Password  could not be null")
