@@ -37,7 +37,7 @@ public class CustomerController {
 	private CustomerServiceIntr customerServiceImpl;
 
     @Autowired
-   AccountServicesIntr accountServicesIntr;
+    AccountServicesIntr accountServicesIntr;
 	
 	@Autowired
 	private WalletServices wService;
